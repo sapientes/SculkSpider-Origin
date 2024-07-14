@@ -1,0 +1,50 @@
+{
+    "name": "Nearsightedness",
+    "description": "You can't see entities that are far away. Sneak to sense their vibrations.",
+    "type": "apoli:multiple",
+    "prevent": {
+        "type": "apoli:prevent_entity_render",
+        "bientity_condition": {
+            "type": "apoli:and",
+            "conditions": [
+                {
+                    "type": "apoli:distance",
+                    "comparison": ">",
+                    "compare_to": 16
+                },
+                {
+                    "type": "apoli:target_condition",
+                    "condition": {
+                        "type": "apoli:living"
+                    }
+                }
+            ]
+        },
+        "condition": {
+            "type": "apoli:sneaking",
+            "inverted": true
+        }
+    },
+    "glow": {
+        "type": "apoli:entity_glow",
+        "bientity_condition": {
+            "type": "apoli:and",
+            "conditions": [
+                {
+                    "type": "apoli:distance",
+                    "comparison": "<",
+                    "compare_to": 16
+                },
+                {
+                    "type": "apoli:target_condition",
+                    "condition": {
+                        "type": "apoli:living"
+                    }
+                }
+            ]
+        },
+        "condition": {
+            "type": "apoli:sneaking"
+        }
+    }
+}

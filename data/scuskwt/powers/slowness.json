@@ -1,0 +1,14 @@
+{
+    "name": "idk the slowness thing",
+    "description": "slowness",
+    "type": "origins:modify_attribute",
+    "attribute": "minecraft:generic.movement_speed",
+    "modifier": {
+        "name": "Sculk Spider speed debuff",
+        "value": -0.2,
+        "operation": "multiply_base"
+    },
+    "condition": {
+        "type": "apoli:exposed_to_sun"
+    }
+}

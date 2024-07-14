@@ -1,0 +1,29 @@
+{
+    "name": "Agoraphobia",
+    "description": "Being under the sky scares and blinds you, unless you have the night vision effect.",
+    "type": "apoli:action_over_time",
+    "interval": 40,
+    "entity_action": {
+        "type": "apoli:apply_effect",
+        "effect": {
+            "effect": "minecraft:darkness",
+            "show_particles": true,
+            "is_ambient": true,
+            "duration": 100,
+            "show_icon": true
+        }
+    },
+    "condition": {
+        "type": "apoli:and",
+        "conditions": [
+            {
+                "type": "apoli:exposed_to_sky"
+            },
+            {
+                "type": "apoli:status_effect",
+                "effect": "minecraft:night_vision",
+                "inverted": true
+            }
+        ]
+    }
+}

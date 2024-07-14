@@ -1,0 +1,130 @@
+{
+    "name": "XP Fueled",
+    "description": "You need to eat xp to survive. It's not the act of having xp but the act of harvesting it that fills you.",
+    "type": "apoli:multiple",
+    "res": {
+        "type": "apoli:resource",
+        "min": 0,
+        "max": 700,
+        "start_value": 100,
+        "hud_render": {
+            "should_render": true,
+            "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+            "bar_index": 0
+        }
+    },
+    "detect": {
+        "type": "apoli:action_over_time",
+        "entity_action": {
+            "type": "apoli:and",
+            "actions": [
+                {
+                    "type": "apoli:execute_command",
+                    "command": "execute store result score @s scuskwt.current_xp run data get entity @s XpTotal"
+                },
+                {
+                    "type": "apoli:execute_command",
+                    "command": "scoreboard players operation @s scuskwt.current_xp -= @s scuskwt.past_xp"
+                },
+                {
+                    "type": "apoli:if_else",
+                    "condition": {
+                        "type": "apoli:command",
+                        "command": "execute if score @s scuskwt.current_xp matches 0..",
+                        "comparison": ">=",
+                        "compare_to": 1
+                    },
+                    "if_action": {
+                        "type": "apoli:execute_command",
+                        "command": "resource operation @s scuskwt:reserves_res += @s scuskwt.current_xp"
+                    }
+                },
+                {
+                    "type": "apoli:execute_command",
+                    "command": "execute store result score @s scuskwt.past_xp run data get entity @s XpTotal"
+                }
+            ]
+        }
+    },
+    "callback": {
+        "type": "apoli:action_on_callback",
+        "entity_action_gained": {
+            "type": "apoli:and",
+            "actions": [
+                {
+                    "type": "apoli:execute_command",
+                    "command": "execute store result score @s scuskwt.current_xp run data get entity @s XpTotal"
+                },
+                {
+                    "type": "apoli:execute_command",
+                    "command": "execute store result score @s scuskwt.past_xp run data get entity @s XpTotal"
+                }
+            ]
+        }
+    },
+    "no_exhaust": {
+        "type": "apoli:modify_exhaustion",
+        "modifier": {
+            "operation": "multiply_total",
+            "value": -1
+        }
+    },
+    "no_nat_regen": {
+        "type": "apoli:disable_regen"
+    },
+    "heal": {
+        "type": "apoli:action_over_time",
+        "interval": 20,
+        "entity_action": {
+            "type": "apoli:and",
+            "actions": [
+                {
+                    "type": "apoli:heal",
+                    "amount": 1
+                },
+                {
+                    "type": "apoli:change_resource",
+                    "resource": "*:*_res",
+                    "change": -10
+                }
+            ]
+        },
+        "condition": {
+            "type": "apoli:and",
+            "conditions": [
+                {
+                    "type": "apoli:relative_health",
+                    "comparison": "<",
+                    "compare_to": 1
+                },
+                {
+                    "type": "apoli:resource",
+                    "resource": "*:*_res",
+                    "comparison": ">=",
+                    "compare_to": 10
+                }
+            ]
+        }
+    },
+    "sprinting": {
+        "type": "apoli:action_over_time",
+        "interval": 20,
+        "entity_action": {
+            "type": "apoli:change_resource",
+            "resource": "*:*_res",
+            "change": -1
+        },
+        "condition": {
+            "type": "apoli:sprinting"
+        }
+    },
+    "prevent_sprint": {
+        "type": "apoli:prevent_sprinting",
+        "condition": {
+            "type": "apoli:resource",
+            "resource": "*:*_res",
+            "comparison": "==",
+            "compare_to": 0
+        }
+    }
+}

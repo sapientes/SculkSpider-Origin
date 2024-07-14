@@ -1,0 +1,29 @@
+{
+    "name": "XRay",
+    "description": "You can detect blocks by sending vibrations in a straight line.",
+    "type": "apoli:active_self",
+    "entity_action": {
+        "type": "apoli:and",
+        "actions": [
+            {
+                "type": "apoli:spawn_entity",
+                "entity_type": "minecraft:armor_stand",
+                "tag": "{Tags:[\"scuskwt.xray\"],NoGravity:1b,Small:1b,Marker:1b,Invisible:1b}",
+                "entity_action": {
+                    "type": "apoli:grant_power",
+                    "power": "*:xraycast",
+                    "source": "*:*"
+                }
+            },
+            {
+                "type": "apoli:execute_command",
+                "command": "execute anchored eyes run tp @e[tag=scuskwt.xray] ^ ^ ^ ~ ~"
+            },
+            {
+                "type": "apoli:play_sound",
+                "sound": "block.sculk_sensor.clicking"
+            }
+        ]
+    },
+    "key": "key.origins.primary_active"
+}

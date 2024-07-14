@@ -1,0 +1,17 @@
+{
+	"powers": [
+		"scuskwt:night_vision",
+		"scuskwt:mining_affinity",
+		"scuskwt:xray",
+		"scuskwt:shootweb",
+		"scuskwt:reserves",
+		"scuskwt:blindness",
+		"scuskwt:slowness",
+		"scuskwt:nearsightedness"
+	],
+	"icon": "minecraft:sculk_vein",
+	"order": 1,
+	"impact": 0,
+	"name": "Sculk Spider",
+	"description": "Cave dwellers that feed on experience from underground minerals."
+}

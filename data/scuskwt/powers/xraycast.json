@@ -1,0 +1,51 @@
+{
+    "description": "Power for the armor stand that scans for ores.",
+    "type": "apoli:multiple",
+    "forward": {
+        "type": "apoli:action_over_time",
+        "interval": 2,
+        "entity_action": {
+            "type": "apoli:and",
+            "actions": [
+                {
+                    "type": "apoli:execute_command",
+                    "command": "function scuskwt:ore/detect"
+                },
+                {
+                    "type": "apoli:execute_command",
+                    "command": "tp ^ ^ ^0.5"
+                },
+                {
+                    "type": "apoli:change_resource",
+                    "resource": "*:*_far",
+                    "change": 1
+                },
+                {
+                    "type": "apoli:execute_command",
+                    "command": "particle minecraft:sculk_charge_pop ~ ~ ~ 0.2 0.2 0.2 0 4"
+                }
+            ]
+        }
+    },
+    "far": {
+        "type": "apoli:resource",
+        "min": 0,
+        "max": 12,
+        "hud_render": {
+            "should_render": false
+        },
+        "max_action": {
+            "type": "apoli:and",
+            "actions": [
+                {
+                    "type": "apoli:execute_command",
+                    "command": "kill @e[type=marker,tag=scuskwt.detected]"
+                },
+                {
+                    "type": "apoli:execute_command",
+                    "command": "function scuskwt:kill"
+                }
+            ]
+        }
+    }
+}

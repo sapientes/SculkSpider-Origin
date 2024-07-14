@@ -1,0 +1,11 @@
+{
+    "name": "Cave Vision",
+    "description": "You can see perfectly in dark areas.",
+    "type": "origins:toggle_night_vision",
+    "strength": 0.5,
+    "key": "key.saveToolbarActivator",
+    "condition": {
+        "type": "apoli:exposed_to_sky",
+        "inverted": true
+    }
+}

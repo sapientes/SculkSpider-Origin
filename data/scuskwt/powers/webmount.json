@@ -1,0 +1,154 @@
+{
+    "description": "Power for the web mount",
+    "hidden": true,
+    "type": "apoli:multiple",
+    "invis": {
+        "type": "apoli:invisibility",
+        "condition": {
+            "type": "apoli:constant",
+            "value": true
+        }
+    },
+    "health": {
+        "type": "origins:attribute",
+        "modifier": {
+            "attribute": "minecraft:generic.max_health",
+            "value": -8,
+            "operation": "addition"
+        }
+    },
+    "killed": {
+        "type": "apoli:modify_damage_taken",
+        "modifier": {
+            "operation": "multiply_total_multiplicative",
+            "value": -1
+        },
+        "bientity_action": {
+            "type": "apoli:target_action",
+            "action": {
+                "type": "apoli:and",
+                "actions": [
+                    {
+                        "type": "apoli:passenger_action",
+                        "action": {
+                            "type": "apoli:and",
+                            "actions": [
+                                {
+                                    "type": "apoli:dismount"
+                                },
+                                {
+                                    "type": "apoli:execute_command",
+                                    "command": "particle dust 1 1 1 1 ~ ~ ~ 0.8 0.2 0.8 1 30"
+                                },
+                                {
+                                    "type": "apoli:delay",
+                                    "action": {
+                                        "type": "apoli:add_velocity",
+                                        "space": "world",
+                                        "set": false,
+                                        "y": 1
+                                    },
+                                    "ticks": 1
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "apoli:execute_command",
+                        "command": "function scuskwt:kill"
+                    }
+                ]
+            }
+        },
+        "damage_condition": {
+            "type": "apoli:or",
+            "inverted": true,
+            "conditions": [
+                {
+                    "type": "apoli:name",
+                    "name": "drown"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "hotFloor"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "freeze"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "inWall"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "inFire"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "onFire"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "sweetBerryBush"
+                },
+                {
+                    "type": "apoli:out_of_world"
+                }
+            ]
+        }
+    },
+    "nodrown": {
+        "type": "apoli:modify_damage_taken",
+        "modifier": {
+            "operation": "multiply_total_multiplicative",
+            "value": -1
+        },
+        "damage_condition": {
+            "type": "apoli:or",
+            "conditions": [
+                {
+                    "type": "apoli:name",
+                    "name": "drown"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "hotFloor"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "freeze"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "inWall"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "inFire"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "onFire"
+                },
+                {
+                    "type": "apoli:name",
+                    "name": "sweetBerryBush"
+                }
+            ]
+        }
+    },
+    "die": {
+        "type": "apoli:action_over_time",
+        "interval": 1,
+        "falling_action": {
+            "type": "apoli:execute_command",
+            "command": "function scuskwt:kill"
+        },
+        "condition": {
+            "type": "apoli:passenger",
+            "comparison": ">",
+            "compare_to": 0
+        }
+    }
+}
