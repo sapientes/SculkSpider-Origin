@@ -33,7 +33,7 @@
                 {
                     "type": "apoli:distance",
                     "comparison": "<",
-                    "compare_to": 16
+                    "compare_to": 8
                 },
                 {
                     "type": "apoli:target_condition",
