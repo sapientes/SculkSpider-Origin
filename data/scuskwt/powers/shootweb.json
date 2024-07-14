@@ -1,6 +1,6 @@
 {
     "name": "Web Shooter",
-    "description": "Handles web creation. To create a web, charge a bow to max. Webs can be broken with sword or shear at their ends if close enough.",
+    "description": "Shoot a web and walk on top on it. Webs dissapear when unused.",
     "badges": [
         {
             "type": "origins:tooltip",
@@ -25,7 +25,12 @@
                     "distance": 32,
                     "fluid_handling": "none",
                     "entity": false,
-                    "command_at_hit": "summon marker ~ ~ ~ {Tags:[\"scuskwt.target\"],NoGravity:1b}"
+                    "command_at_hit": "summon marker ~ ~ ~ {Tags:[\"scuskwt.target\"],NoGravity:1b}",
+                    "command_along_ray": "particle dust 1 1 1 0.5"
+                },
+                {
+                    "type": "apoli:execute_command",
+                    "command": "summon marker ~ ~ ~ {Tags:[\"scuskwt.start\"],NoGravity:1b}"
                 },
                 {
                     "type": "apoli:spawn_entity",
@@ -50,7 +55,7 @@
                                 "type": "apoli:target_action",
                                 "action": {
                                     "type": "apoli:execute_command",
-                                    "command": "execute facing entity @e[type=marker,tag=scuskwt.target,limit=1,sort=nearest] run tp ^ ^-0.3 ^"
+                                    "command": "execute positioned ~ ~0.5 ~ facing entity @e[type=marker,tag=scuskwt.target,limit=1,sort=nearest] eyes run tp @s ^ ^-0.3 ^ ~ ~"
                                 }
                             }
                         ]
@@ -76,11 +81,36 @@
                 },
                 {
                     "type": "apoli:execute_command",
-                    "command": "kill @e[type=marker,tag=scuskwt.target,limit=1,sort=nearest]"
+                    "command": "kill @e[type=marker,tag=scuskwt.target]"
+                },
+                {
+                    "type": "apoli:execute_command",
+                    "command": "kill @e[type=marker,tag=scuskwt.start]"
                 }
             ]
         },
-        "key": "key.origins.secondary_active"
+        "key": "key.origins.secondary_active",
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "apoli:riding",
+                    "inverted": true
+                },
+                {
+                    "type": "apoli:fluid_height",
+                    "fluid": "water",
+                    "comparison": "==",
+                    "compare_to": 0
+                },
+                {
+                    "type": "apoli:fluid_height",
+                    "fluid": "lava",
+                    "comparison": "==",
+                    "compare_to": 0
+                }
+            ]
+        }
     },
     "right": {
         "type": "apoli:active_self",
@@ -337,49 +367,26 @@
                         "action": {
                             "type": "apoli:if_else",
                             "condition": {
-                                "type": "apoli:target_condition",
+                                "type": "apoli:actor_condition",
                                 "condition": {
-                                    "type": "origins:and",
-                                    "conditions": [
-                                        {
-                                            "type": "apoli:command",
-                                            "command": "execute as @e[distance=..0.5,tag=kweb_pivotend] if score @s kweb_id = @e[type=bee,limit=1,sort=nearest,tag=scuskwt.mount] kweb_id",
-                                            "comparison": "==",
-                                            "compare_to": 0
-                                        },
-                                        {
-                                            "type": "apoli:command",
-                                            "command": "execute if block ^ ^ ^0.1 #apoli:material/air",
-                                            "comparison": ">",
-                                            "compare_to": 0
-                                        }
-                                    ]
+                                    "type": "apoli:resource",
+                                    "resource": "*:*_sprinting",
+                                    "comparison": ">",
+                                    "compare_to": 0
                                 }
                             },
                             "if_action": {
-                                "type": "apoli:if_else",
-                                "condition": {
-                                    "type": "apoli:actor_condition",
-                                    "condition": {
-                                        "type": "apoli:resource",
-                                        "resource": "*:*_sprinting",
-                                        "comparison": ">",
-                                        "compare_to": 0
-                                    }
-                                },
-                                "if_action": {
-                                    "type": "apoli:target_action",
-                                    "action": {
-                                        "type": "apoli:execute_command",
-                                        "command": "tp ^ ^ ^0.5"
-                                    }
-                                },
-                                "else_action": {
-                                    "type": "apoli:target_action",
-                                    "action": {
-                                        "type": "apoli:execute_command",
-                                        "command": "tp ^ ^ ^0.3"
-                                    }
+                                "type": "apoli:target_action",
+                                "action": {
+                                    "type": "apoli:execute_command",
+                                    "command": "execute if block ^ ^ ^0.5 #apoli:material/air run tp ^ ^ ^0.5"
+                                }
+                            },
+                            "else_action": {
+                                "type": "apoli:target_action",
+                                "action": {
+                                    "type": "apoli:execute_command",
+                                    "command": "execute if block ^ ^ ^0.3 #apoli:material/air run tp ^ ^ ^0.3"
                                 }
                             }
                         },
@@ -397,49 +404,26 @@
                         "action": {
                             "type": "apoli:if_else",
                             "condition": {
-                                "type": "apoli:target_condition",
+                                "type": "apoli:actor_condition",
                                 "condition": {
-                                    "type": "origins:and",
-                                    "conditions": [
-                                        {
-                                            "type": "apoli:command",
-                                            "command": "execute as @e[distance=..0.5,tag=kweb_pivotstart] if score @s kweb_id = @e[type=bee,limit=1,sort=nearest,tag=scuskwt.mount] kweb_id",
-                                            "comparison": "==",
-                                            "compare_to": 0
-                                        },
-                                        {
-                                            "type": "apoli:command",
-                                            "command": "execute if block ^ ^ ^-0.1 #apoli:material/air",
-                                            "comparison": ">",
-                                            "compare_to": 0
-                                        }
-                                    ]
+                                    "type": "apoli:resource",
+                                    "resource": "*:*_sprinting",
+                                    "comparison": ">",
+                                    "compare_to": 0
                                 }
                             },
                             "if_action": {
-                                "type": "apoli:if_else",
-                                "condition": {
-                                    "type": "apoli:actor_condition",
-                                    "condition": {
-                                        "type": "apoli:resource",
-                                        "resource": "*:*_sprinting",
-                                        "comparison": ">",
-                                        "compare_to": 0
-                                    }
-                                },
-                                "if_action": {
-                                    "type": "apoli:target_action",
-                                    "action": {
-                                        "type": "apoli:execute_command",
-                                        "command": "tp ^ ^ ^-0.5"
-                                    }
-                                },
-                                "else_action": {
-                                    "type": "apoli:target_action",
-                                    "action": {
-                                        "type": "apoli:execute_command",
-                                        "command": "tp ^ ^ ^-0.3"
-                                    }
+                                "type": "apoli:target_action",
+                                "action": {
+                                    "type": "apoli:execute_command",
+                                    "command": "execute if block ^ ^ ^-0.5 #apoli:material/air run tp ^ ^ ^-0.5"
+                                }
+                            },
+                            "else_action": {
+                                "type": "apoli:target_action",
+                                "action": {
+                                    "type": "apoli:execute_command",
+                                    "command": "execute if block ^ ^ ^-0.3 #apoli:material/air run tp ^ ^ ^-0.3"
                                 }
                             }
                         },
