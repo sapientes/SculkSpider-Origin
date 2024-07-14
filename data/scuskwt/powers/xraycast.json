@@ -39,10 +39,6 @@
             "actions": [
                 {
                     "type": "apoli:execute_command",
-                    "command": "kill @e[type=marker,tag=scuskwt.detected]"
-                },
-                {
-                    "type": "apoli:execute_command",
                     "command": "function scuskwt:kill"
                 }
             ]

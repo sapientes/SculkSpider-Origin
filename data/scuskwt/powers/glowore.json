@@ -1,0 +1,50 @@
+{
+    "description": "Power for the shulker that makes ores glow",
+    "type": "apoli:multiple",
+    "exposed": {
+        "type": "apoli:action_over_time",
+        "interval": 1,
+        "entity_action": {
+            "type": "apoli:execute_command",
+            "command": "function scuskwt:kill"
+        },
+        "condition": {
+            "type": "origins:in_block",
+            "block_condition": {
+                "type": "origins:light_blocking",
+                "inverted": true
+            }
+        }
+    },
+    "res": {
+        "type": "apoli:resource",
+        "min": 0,
+        "max": 80,
+        "max_action": {
+            "type": "apoli:execute_command",
+            "command": "function scuskwt:kill"
+        }
+    },
+    "die": {
+        "type": "apoli:action_over_time",
+        "interval": 2,
+        "entity_action": {
+            "type": "apoli:change_resource",
+            "resource": "*:*_res",
+            "change": 1
+        }
+    },
+    "invis": {
+        "type": "apoli:invisibility",
+        "condition": {
+            "type": "apoli:resource",
+            "resource": "*:*_res",
+            "comparison": "==",
+            "compare_to": 0
+        }
+    },
+    "render": {
+        "type": "apoli:prevent_feature_render",
+        "feature": "shulker_head"
+    }
+}
