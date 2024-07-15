@@ -1,6 +1,6 @@
 {
     "name": "Agoraphobia",
-    "description": "Being under the sky scares and blinds you, unless you have the night vision effect.",
+    "description": "You can't see properly under the sky, unless under the effects of night vision.",
     "type": "apoli:action_over_time",
     "interval": 40,
     "entity_action": {
