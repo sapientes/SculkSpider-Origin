@@ -1,5 +1,5 @@
 {
-    "name": "XRay",
+    "name": "Ore Sensor",
     "description": "You can detect blocks by sending vibrations in a straight line.",
     "type": "apoli:active_self",
     "entity_action": {
