@@ -60,6 +60,12 @@
                     "command": "execute store result score @s scuskwt.past_xp run data get entity @s XpTotal"
                 }
             ]
+        },
+        "entity_action_respawned": {
+            "type": "apoli:change_resource",
+            "resource": "*:*_res",
+            "operation": "set",
+            "change": 100
         }
     },
     "no_exhaust": {
@@ -85,7 +91,7 @@
                 {
                     "type": "apoli:change_resource",
                     "resource": "*:*_res",
-                    "change": -10
+                    "change": -7
                 }
             ]
         },
@@ -101,7 +107,7 @@
                     "type": "apoli:resource",
                     "resource": "*:*_res",
                     "comparison": ">=",
-                    "compare_to": 10
+                    "compare_to": 7
                 }
             ]
         }
