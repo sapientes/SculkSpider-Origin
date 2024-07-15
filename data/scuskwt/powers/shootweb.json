@@ -1,6 +1,6 @@
 {
-    "name": "Web Shooter",
-    "description": "Shoot a web and walk on top on it. Webs dissapear when unused.",
+    "name": "Web Line",
+    "description": "Shoot a web and climb on top on it. Webs disappear when unused.",
     "badges": [
         {
             "type": "origins:tooltip",
